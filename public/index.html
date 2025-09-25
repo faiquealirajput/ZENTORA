@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentora - E-Commerce Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; }
+        .header { background: #ff6b35; color: white; padding: 1rem; }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .auth-buttons button { margin-left: 10px; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .product-card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; text-align: center; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+        .btn { background: #ff6b35; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 2rem; width: 400px; border-radius: 8px; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Zentora</div>
+            <div class="auth-buttons">
+                <button onclick="openModal('loginModal')">Login</button>
+                <button onclick="openModal('registerModal')">Register</button>
+                <button id="dashboardBtn" style="display:none;" onclick="showDashboard()">Dashboard</button>
+                <button id="logoutBtn" style="display:none;" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Zentora</h1>
+        <p>Your Ultimate E-Commerce Destination</p>
+        <button class="btn" onclick="showProducts()">Shop Now</button>
+    </section>
+
+    <div class="container">
+        <div id="productsSection" class="products"></div>
+        <div id="dashboardSection" style="display:none;">
+            <h2>Dashboard</h2>
+            <div id="dashboardContent"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <button type="button" onclick="closeModal('loginModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h2>Register</h2>
+            <form onsubmit="register(event)">
+                <div class="form-group">
+                    <input type="text" id="registerName" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="registerEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="registerPassword" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <select id="registerRole">
+                        <option value="customer">Customer</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <button type="button" onclick="closeModal('registerModal')">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
